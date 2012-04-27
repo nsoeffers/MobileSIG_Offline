@@ -1,17 +1,58 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mobile SIG: Offline sessie</title>        
+        <link rel="shortcut icon" href="http://www.aca-it.be/aca-theme/images/favicon.ico">
+        <link REL=StyleSheet HREF="css/style.css" TYPE="text/css">
+        <link REL=StyleSheet HREF="http://imakewebthings.com/deck.js/extensions/navigation/deck.navigation.css" TYPE="text/css">
+
+        <title>Mobile SIG: HTML5 Offline</title>        
         
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-        <script type="text/javascript" src="https://raw.github.com/imakewebthings/deck.js/master/modernizr.custom.js"></script>
-        <script type="text/javascript" src="https://raw.github.com/imakewebthings/deck.js/master/core/deck.core.js"></script>
-        
-        <style type="text/css" src="css/style.css"></style>
+        <script type="text/javascript" src="http://imakewebthings.com/deck.js/modernizr.custom.js"></script>
+        <script type="text/javascript" src="http://imakewebthings.com/deck.js/core/deck.core.js"></script>        
+        <script type="text/javascript" src="http://imakewebthings.com/deck.js/extensions/hash/deck.hash.js"></script>
+        <script type="text/javascript" src="http://imakewebthings.com/deck.js/extensions/navigation/deck.navigation.js"></script>
+        <script type="text/javascript">
+        <!-- 
+    		$(document).ready(function() {
+				$.deck('.slide');
+			}); 
+            
+    		function showMeTheCode(event){
+				$(event.target).parent('ul').children().not(event.target).removeClass('showMeTheCode');
+				$(event.target).toggleClass('showMeTheCode');
+			}			
+        // -->
+        </script>
     </head>
-    <body>
+    <body class="deck-container">
     	<section class="slide" id="start">
-			<h1>Mobile SIG: Offline sessie</h1>
+			<h1>Mobile SIG: 
+HTML5 Offline</h1>
 		</section>
+        <section class="slide">
+            <h2>Overzicht</h2>
+            <ul>
+                <li>Application Cache</li>
+                <li>Local- & SessionStorage</li>
+                <li>WebSQL Database API</li>
+                <li>IndexedDB</li>
+            </ul>
+        </section>
+        <section class="slide">
+            <h2>Application Cache</li>
+            <ul>
+                <li onclick="showMeTheCode(event)" class="selectable">Manifest file
+                    <code class="itemCode">CACHE MANIFEST
+
+CACHE:
+index.html                    
+                    </code>
+                </li>
+                <li></li>
+            </ul>
+        </section>
+    	<a href="#" class="deck-prev-link" title="Previous"></a>
+		<a href="#" class="deck-next-link" title="Next"></a>		        
     </body>
 </html>
