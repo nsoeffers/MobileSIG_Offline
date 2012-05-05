@@ -1,0 +1,161 @@
+#feedbackZone {
+    left: 10%;
+    right: 10%;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;
+    position: absolute;
+    top: 5em;
+    z-index: 9;
+}
+
+.info:before {
+    content: 'i';
+    color: green;
+}
+
+.error:before {
+    content: '!';
+    color: darkred;
+}
+
+.info:before, .error:before  {
+    background: white;
+    position: absolute;
+    left: 5px;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.5em;
+    text-indent: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.info, .error {
+    border-radius: 5px;
+    padding: 5px;
+    text-indent: 1.5em;
+    color: whitesmoke;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.info {
+    background-color: rgba(0, 128, 0, 0.7);
+}
+
+.error {
+    background-color: darkred;
+}
+
+.delete {
+    float: right;
+}
+
+body {
+    font-family: Handlee;
+    background-color: #00A9E7;
+    color: #363743;
+    font-size: 30px;
+}
+
+h3 {
+    text-align: center;    
+    text-shadow: 2px 2px 0 white;
+    -webkit-margin-before: 0.5em;
+    -webkit-margin-after: 0.5em;
+}
+
+input {
+    height: 1.5em;
+    padding: 0.4em;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 0.3em;
+    font-size: 1.2em;
+    font-family: Handlee;
+    color: #363743;
+    box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.4);    
+}
+
+input[type="checkbox"]{
+    -khtml-appearance: none;
+    width: 1em;
+    height: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 0.25em;  
+    position: absolute;
+    left: 0;
+}
+
+input[type="checkbox"]:checked:before{
+    content: '\2714';
+    color: green;
+    display: block;
+    position: absolute;
+    font-size: 1.5em;
+    font-family: DejaVu;
+    z-index: 2;
+    margin-top: -0.6em;
+    margin-left: -0.2em;
+}
+
+
+#newTask {
+    margin: 0 10%;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;    
+    box-sizing: border-box;
+}
+
+.listContainer {
+    position: absolute;
+    top: 5em;
+    left: 10%;
+    right: 10%;
+    bottom: 2em;
+    border: 1px solid rgba(0, 0, 0, 0.7);
+    border-radius: 0.5em;    
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);    
+    background-color: rgba(255, 255, 255, 0.6);
+    overflow-y: auto;
+    -webkit-transition: height 1.5s ease;
+    -moz-transition: height 1.5s ease;
+    -o-transition: height 1.5s ease;
+    transition: height 1.5s ease;
+    
+}
+
+.listContainer ul li, .listContainer ul li.noItems {
+    list-style-type: none;
+    color: #363743;
+    padding: 5px 10px;
+    margin-right: 1em;
+    margin-left: 0.5em;
+}
+
+.listContainer ul li {
+    border-bottom: 1px solid rgba(54, 55, 67, 0.8);    
+}
+
+.listContainer ul li.noItems {
+    border-bottom: none;
+}
+
+.toolbar {
+    position: absolute;
+    bottom: 0;
+    height: 1.6em;
+    left: 10%;
+    right: 10%;
+    background: #363743;
+    border-radius: 0.5em 0.5em 0 0;
+}
+
+.clearAll {
+    color: red;
+    float: right;
+    margin-right: 0.5em;
+    margin-top: 0.25em;
+    cursor: pointer;
+}
