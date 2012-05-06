@@ -1,44 +1,58 @@
 define(function(require, exports, module){
     "use strict";
 
-    exports.retrieveItems = function (){
-       if ( !window.localStorage ) {
+    var items = [];        
+
+    exports.init = function() {
+        if ( !window.localStorage ) {
            throw 'LocalStorage is not supported in your browser';
-       }
+        }        
+    };
     
-       window.items = [];
-       if ( !window.localStorage.items || window.localStorage.items === "[]" ) {
-            $('.listContainer ul').html('<li class="noItems">No items stored yet, please add some</li>');
-       } else {
-            window.items = JSON.parse(window.localStorage.items);       
-            return window.items;
-       }       
+    exports.daoDescription = "LocalStorage DAO";
+    
+    exports.retrieveItems = function (callback){    
+        items = [];
+        if ( window.localStorage.items) {
+            items = JSON.parse(window.localStorage.items);       
+        }       
+        callback(items);
     };
 
-    exports.saveItem = function saveItem(item){
-        if ( this.findItem(item.description) !== null ){
-            throw 'Entry with description "' + item.description + '" already exists';
-        }
-        window.items.push(item);
-        exports.syncItems();
+    exports.saveItem = function(item, successCallback, failureCallback){
+        this.findItem(item.description, 
+                      function(item) { 
+                          failureCallback('Entry with description "' + item.description + '" already exists');                           
+                      },
+                      function() {
+                          items.push(item);
+                          syncItems();
+                          successCallback(item);
+                      });
     };
     
-    exports.removeAllItems = function(){
-        window.items = [];
-        exports.syncItems();
+    exports.removeAllItems = function(successCallback){
+        items = [];
+        syncItems();
+        successCallback();
     };
     
-    this.findItem = function (description){
-        for(var index in window.items){
-            if ( description === window.items[index].description ) {
-                return window.items[index];
+    exports.updateItem = function(item) {
+        syncItems();
+    };
+    
+    exports.findItem = function(description, successCallback, failureCallback){
+        for(var index in items){
+            if ( description === items[index].description ) {
+                successCallback(items[index]);
+                return;
             }
         }
-        return null;
+        failureCallback('Cannot find item with description' + description);
     };
     
-    exports.syncItems = function(){
-        window.localStorage.items = JSON.stringify(window.items);
+    var syncItems = function(){
+        window.localStorage.items = JSON.stringify(items);
     };
 
 });

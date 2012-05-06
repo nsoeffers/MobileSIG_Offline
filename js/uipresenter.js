@@ -3,16 +3,16 @@ define(["jquery", "exports", "domain"], function($, exports, domain) {
         
     // Public function to show errorMessage
     exports.showError = function showError(message) {
-        this.showMessage(message, 'error');
+        showMessage(message, 'error');
     };
     
     // Public function to show infoMessage
     exports.showInfo = function showInfo(message) {
-        this.showMessage(message, 'info');
+        showMessage(message, 'info');
     };
     
     // Private function to show feedback message
-    this.showMessage = function showMessage(message, type){
+    var showMessage = function showMessage(message, type){
         $('#feedbackZone').append('<div class="' + type + '">' + message + '<span class="delete">&#x2718;</span></div>');
         if ( $('#feedbackZone > div').size() > 0){
             $('.listContainer').css('top', '7em');
@@ -20,7 +20,7 @@ define(["jquery", "exports", "domain"], function($, exports, domain) {
     };   
     
     // Private function add an Item (model) to the UI (view)
-    this.addItem = function(item){
+    var addItem = function(item){
         if ( $('.listContainer ul li.noItems').size() == 1 ){
             $('.listContainer ul').html('<li><input type="checkbox"' + (item.checked? 'checked' : '') + '/>' + item.description + '</li>');                
         } else {
@@ -30,46 +30,55 @@ define(["jquery", "exports", "domain"], function($, exports, domain) {
     };
 
     // Private function to refresh the item list in the UI (view)
-    this.refreshItemList = function(){
-        try {
-            var items = this.dao.retrieveItems();
-            for(var index in items){
-                this.addItem(items[index]);
+    var refreshItemList = function(){
+        dao.retrieveItems(function(items){
+            if ( !items || items === null || items.length === 0 ){
+                $('.listContainer ul').html('<li class="noItems">No items stored yet, please add some</li>');
+            } else {
+                for(var index in items){
+                    addItem(items[index]);
+                }
             }
-        } catch (error){
-            this.showError(error);
-        }        
+        });
     };
     
+    var dao;
+    
     // Public method which will be called from the controller
-    exports.start = function(dao){
-        this.dao = dao;
+    exports.start = function(injectedDao){
+        dao = injectedDao;
         var that = this;
+        
+        try { 
+            dao.init();
+        } catch (error){
+            this.showError(error);
+        }                    
         
         $('#newTask').keypress(function(event) {
             if ( event.which == 13 ) {            
                 var item = new domain.Item($('#newTask').val(), false);
-                try {
-                    dao.saveItem(item);
-                    that.addItem(item);
-                } catch (error ){
-                    that.showError(error);
-                }
+                dao.saveItem(item, 
+                             function() { addItem(item); }, 
+                             function(errorMessage) { that.showError(errorMessage); });
             }
         });
-        
+                
         $('input[type="checkbox"]').live('click', function(event) {
-           var checkedItem = dao.findItem($(event.target).parent().text());
-           if( checkedItem === null){
-               exports.showError('Cannot find item with description' + $(event.target).parent().text());
-           }
-           checkedItem.checked = event.target.checked;       
-           dao.syncItems();
+           dao.findItem($(event.target).parent().text(),
+                        function(checkedItem){ // success callback
+                           checkedItem.checked = event.target.checked;       
+                           dao.updateItem(checkedItem, 
+                                          function(errorMessage) { that.showError(errorMessage); });
+                        },
+                        function(errorMessage) { // failure callback
+                           exports.showError(errorMessage);                                              
+                        });
         });
         
         $('.clearAll').click(function(){
-           dao.removeAllItems();
-           that.refreshItemList();
+           dao.removeAllItems(function() { refreshItemList(); }, 
+                              function(errorMessage) { that.showError(errorMessage); });
         });        
         
         $('#feedbackZone .delete').live('click', function(event){
@@ -79,7 +88,8 @@ define(["jquery", "exports", "domain"], function($, exports, domain) {
             }        
         });
         
-        this.refreshItemList();
+        refreshItemList();
+        $('.daoInfo').text(dao.daoDescription).css('display', 'block');
     };
         
 });

@@ -17,7 +17,7 @@
 
 .error:before {
     content: '!';
-    color: darkred;
+    color: #B2001F;
 }
 
 .info:before, .error:before  {
@@ -30,6 +30,9 @@
     text-indent: 0;
     text-align: center;
     font-weight: bold;
+    margin-top: 0.15em;
+    padding: 0 2px 4px 2px;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
 
 .info, .error {
@@ -45,11 +48,13 @@
 }
 
 .error {
-    background-color: darkred;
+    background-color: #B2001F;
 }
 
 .delete {
     float: right;
+    margin-right: 0.5em;
+    line-height: 1.5em;
 }
 
 body {
@@ -158,4 +163,18 @@ input[type="checkbox"]:checked:before{
     margin-right: 0.5em;
     margin-top: 0.25em;
     cursor: pointer;
+}
+
+.daoInfo {
+    font-size: 0.5em;    
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background: #363743;
+    color: white;
+    padding: 0.3em 1em;
+    border-radius: 0 0 0.5em 0.5em;
+    -webkit-transform-origin: 0 0;
+    -webkit-transform: rotate(-90deg);
+    display: none;
 }
