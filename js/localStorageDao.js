@@ -24,10 +24,10 @@ define(function(require, exports, module){
                       function(item) { 
                           failureCallback('Entry with description "' + item.description + '" already exists');                           
                       },
-                      function() {
+                      function() { 
                           items.push(item);
                           syncItems();
-                          successCallback(item);
+                          successCallback(item);                          
                       });
     };
     
@@ -37,7 +37,7 @@ define(function(require, exports, module){
         successCallback();
     };
     
-    exports.updateItem = function(item) {
+    exports.updateItem = function() {
         syncItems();
     };
     
