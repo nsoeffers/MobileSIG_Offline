@@ -1,5 +1,5 @@
 require(["jquery", "domain", "uipresenter", "localStorageDao", 
-        "webSqlDao", "domReady"], function($, domain, presenter, localStorageDao, webSqlDao) {
+        "webSqlDao", "indexedDbDao", "domReady"], function($, domain, presenter, localStorageDao, webSqlDao, indexedDbDao) {
             
     "use strict";
     
@@ -12,6 +12,8 @@ require(["jquery", "domain", "uipresenter", "localStorageDao",
         dao = localStorageDao;
     } else if ( daoImpl === "webSql") {
         dao = webSqlDao;
+    } else if ( daoImpl === "indexedDb") {
+        dao = indexedDbDao;
     } else {
         dao = localStorageDao;
     }
