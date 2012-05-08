@@ -361,6 +361,11 @@ code {
   border-left: 16px solid rgba(0, 0, 0, 0.1);
 }
 
+.prettyprint.linenums li {
+	line-height: 1.5em;
+	list-style-type: decimal;
+	list-style-position: inside;
+}
 
 /*
  ******** Lower screen resolution ************

@@ -3,6 +3,7 @@
     <head>
         <link rel="shortcut icon" href="http://www.aca-it.be/aca-theme/images/favicon.ico">
         <link REL=StyleSheet HREF="css/style.css" TYPE="text/css">
+        <link REL=StyleSheet HREF="css/prettify.css" TYPE="text/css">
         <link REL=StyleSheet HREF="http://imakewebthings.com/deck.js/extensions/navigation/deck.navigation.css" TYPE="text/css">
 
         <title>Mobile SIG: Offline HTML5</title>        
@@ -12,6 +13,7 @@
         <script type="text/javascript" src="http://imakewebthings.com/deck.js/core/deck.core.js"></script>        
         <script type="text/javascript" src="http://imakewebthings.com/deck.js/extensions/hash/deck.hash.js"></script>
         <script type="text/javascript" src="http://imakewebthings.com/deck.js/extensions/navigation/deck.navigation.js"></script>
+        <script type="text/javascript" src="js/prettify.js"></script>
         <script type="text/javascript">
         <!-- 
     		$(document).ready(function() {
@@ -35,7 +37,22 @@
     		function showMeTheCode(event){
 				$(event.target).parent('ul').children().not(event.target).removeClass('showMeTheCode');
 				$(event.target).toggleClass('showMeTheCode');
-			}			
+			}		
+            
+            $(document).ready(function() {
+                $('.slideContent > CODE[id].prettyprint').each(function() {
+                    var codeElement = this;
+                    var codeUrl = this.id.replace('_', '/');
+                    $.ajax({
+                        url: codeUrl,
+                        dataType: 'text',
+                        success: function(data) {
+                            $(codeElement).html(data);
+                            prettyPrint();
+                        }
+                    });
+                });
+            });
         // -->
         </script>
     </head>
@@ -76,10 +93,15 @@ HTML5 Offline</h1>
                 <iframe src="demo.html#localStorage" style="width: 100%; height: 100%; border: none;" scrolling="auto">
                 </iframe>
             </div>
+            <div id="localStorage_dao" class="slideContent">
+                <code id="js_localStorageDao.js" class="prettyprint linenums">
+                </code>
+            </div>
     		<div class="toolbar">
 				<div>
 					<div onclick="flipTo('localStorage_info', event)" class="selectedItem">Info</div>				
-                    <div onclick="flipTo('localStorage_demo', event)">Demo</div>    			
+                    <div onclick="flipTo('localStorage_demo', event)">Demo</div>
+                    <div onclick="flipTo('localStorage_dao', event)">DAO</div>
 				</div>
 			</div>	            
         </section>
@@ -108,10 +130,15 @@ HTML5 Offline</h1>
                 <iframe src="demo.html#webSql" style="width: 100%; height: 100%; border: none;" scrolling="auto">
                 </iframe>
             </div>
+            <div id="webSql_dao" class="slideContent">
+                <code id="js_webSqlDao.js" class="prettyprint linenums">
+                </code>
+            </div>            
         	<div class="toolbar">
 				<div>
 					<div onclick="flipTo('webSql_info', event)" class="selectedItem">Info</div>				
-                    <div onclick="flipTo('webSql_demo', event)">Demo</div>    			
+                    <div onclick="flipTo('webSql_demo', event)">Demo</div>
+                    <div onclick="flipTo('webSql_dao', event)">DAO</div>
 				</div>
 			</div>	                        
         </section>      
@@ -130,10 +157,15 @@ HTML5 Offline</h1>
                 <iframe src="demo.html#indexedDb" style="width: 100%; height: 100%; border: none;" scrolling="auto">
                 </iframe>
             </div>
+            <div id="indexedDb_dao" class="slideContent">
+                <code id="js_indexedDbDao.js" class="prettyprint linenums">
+                </code>
+            </div>            
             <div class="toolbar">
 				<div>
 					<div onclick="flipTo('indexedDb_info', event)" class="selectedItem">Info</div>				
                     <div onclick="flipTo('indexedDb_demo', event)">Demo</div>
+                    <div onclick="flipTo('indexedDb_dao', event)">DAO</div>
 				</div>
 			</div>	                        
             
