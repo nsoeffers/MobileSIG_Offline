@@ -18,6 +18,20 @@
 				$.deck('.slide');
 			}); 
             
+    		function flipTo(idToFlipTo, event){
+                var previousContent = $('#' + idToFlipTo).parent().find('.previousContent');
+                if ( previousContent.attr('id') == idToFlipTo ){
+                    previousContent.addClass('blockTransition');
+                    previousContent.removeClass('previousContent');
+                    previousContent.removeClass('blockTransition');
+                }
+				$(event.target).parent().find('.selectedItem').removeClass('selectedItem');
+				$(event.target).addClass('selectedItem');
+				$('#' + idToFlipTo).parent().find('.previousContent').removeClass('previousContent'); 
+				$('#' + idToFlipTo).parent().find('.currentContent').removeClass('currentContent').addClass('previousContent'); 
+				$('#' + idToFlipTo).addClass('currentContent');	
+			}            
+            
     		function showMeTheCode(event){
 				$(event.target).parent('ul').children().not(event.target).removeClass('showMeTheCode');
 				$(event.target).toggleClass('showMeTheCode');
@@ -49,12 +63,25 @@ HTML5 Offline</h1>
         </section>
         <section class="slide">
             <h2>LocalStorage</h2>
-            <ul>
-                <li>Persistente Key/Value Map(&lt;String, String&gt;)</li>                
-                <li>Serializatie & Deserializatie van en naar String</li>
-                <li>Geen query functionaliteit, enkel key lookup(s)</li> 
-                <li>Makkelijk te debuggen in Safari/Chrome</li>
-                <li>Makkelijk te gebruiken</li>
+            <div id="localStorage_info" class="slideContent currentContent">
+                <ul>
+                    <li>Persistente Key/Value Map(&lt;String, String&gt;)</li>                
+                    <li>Serializatie & Deserializatie van en naar String</li>
+                    <li>Geen query functionaliteit, enkel key lookup(s)</li> 
+                    <li>Makkelijk te debuggen in Safari/Chrome</li>
+                    <li>Makkelijk te gebruiken</li>
+                </ul>
+            </div>
+            <div id="localStorage_demo" class="slideContent">
+                <iframe src="demo.html#localStorage" style="width: 100%; height: 100%; border: none;" scrolling="auto">
+                </iframe>
+            </div>
+    		<div class="toolbar">
+				<div>
+					<div onclick="flipTo('localStorage_info', event)" class="selectedItem">Info</div>				
+                    <div onclick="flipTo('localStorage_demo', event)">Demo</div>    			
+				</div>
+			</div>	            
         </section>
         <section class="slide">
             <h2>SessionStorage</h2>
@@ -67,24 +94,49 @@ HTML5 Offline</h1>
         </section>        
         <section class="slide">
             <h2>WebSQL Database API</h2>
-            <ul>
-                <li>Deprecated API</li>                
-                <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
-                <li>Onderliggend SQLite</li>
-                <li>Terug naar SQL? Geen ORM!</li>
-                <li>Leercurve</li>
-                <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
-            </ul>
+            <div id="webSql_info" class="slideContent currentContent">
+                <ul>
+                    <li>Deprecated API</li>                
+                    <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
+                    <li>Onderliggend SQLite</li>
+                    <li>Terug naar SQL? Geen ORM!</li>
+                    <li>Leercurve</li>
+                    <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
+                </ul>
+            </div>
+            <div id="webSql_demo" class="slideContent">
+                <iframe src="demo.html#webSql" style="width: 100%; height: 100%; border: none;" scrolling="auto">
+                </iframe>
+            </div>
+        	<div class="toolbar">
+				<div>
+					<div onclick="flipTo('webSql_info', event)" class="selectedItem">Info</div>				
+                    <div onclick="flipTo('webSql_demo', event)">Demo</div>    			
+				</div>
+			</div>	                        
         </section>      
         <section class="slide">
             <h2>IndexedDB API</h2>
-            <ul>
-                <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
-                <li>Firefox (SQLite), Chrome (LevelDB), IE 10?</li>
-                <li>Leercurve, niet intuïtief</li>
-                <li>Database moeilijk te verwijderen (Chrome)</li>
-                <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
-            </ul>
+            <div id="indexedDb_info" class="slideContent currentContent">
+                <ul>
+                    <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
+                    <li>Firefox (SQLite), Chrome (LevelDB), IE 10?</li>
+                    <li>Leercurve, niet intuïtief</li>
+                    <li>Database moeilijk te verwijderen (Chrome)</li>
+                    <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
+                </ul>
+            </div>
+            <div id="indexedDb_demo" class="slideContent">
+                <iframe src="demo.html#indexedDb" style="width: 100%; height: 100%; border: none;" scrolling="auto">
+                </iframe>
+            </div>
+            <div class="toolbar">
+				<div>
+					<div onclick="flipTo('indexedDb_info', event)" class="selectedItem">Info</div>				
+                    <div onclick="flipTo('indexedDb_demo', event)">Demo</div>
+				</div>
+			</div>	                        
+            
         </section>              
         <a href="#" class="deck-prev-link" title="Previous"></a>
 		<a href="#" class="deck-next-link" title="Next"></a>		        
