@@ -5,7 +5,7 @@
         <link REL=StyleSheet HREF="css/style.css" TYPE="text/css">
         <link REL=StyleSheet HREF="http://imakewebthings.com/deck.js/extensions/navigation/deck.navigation.css" TYPE="text/css">
 
-        <title>Mobile SIG: HTML5 Offline</title>        
+        <title>Mobile SIG: Offline HTML5</title>        
         
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
         <script type="text/javascript" src="http://imakewebthings.com/deck.js/modernizr.custom.js"></script>
@@ -36,32 +36,57 @@ HTML5 Offline</h1>
                 <li>Application Cache</li>
                 <li>Local- & SessionStorage</li>
                 <li>WebSQL Database API</li>
-                <li>IndexedDB</li>
+                <li>IndexedDB API</li>
             </ul>
         </section>
         <section class="slide">
             <h2>Application Cache</h2>
             <ul>
-                <li>Manifest file
-                    <ul>
-                        <li>MIME Type</li>
-                        <li onclick="showMeTheCode(event)" class="selectable">Format</li>
-                            <code class="itemCode">CACHE MANIFEST
-                            
-CACHE:
-index.html                    
-                            </code>
-                        </li>
-                    </ul>
-                </li>
-                <li></li>
+                <li>Houdt html, image, font, en andere bestanden bij in een cache zodat ze ook offline geopend kunnen worden
+                <li>MIME Type: text/cache-manifest</li>
+                <li>Events: checking, noupdate, downloading, progress, cached, updateready, obsolete, error</li>
             </ul>
         </section>
         <section class="slide">
-            <h2>Local- & SessionStorage</h2>
-            
+            <h2>LocalStorage</h2>
+            <ul>
+                <li>Persistente Key/Value Map(&lt;String, String&gt;)</li>                
+                <li>Serializatie & Deserializatie van en naar String</li>
+                <li>Geen query functionaliteit, enkel key lookup(s)</li> 
+                <li>Makkelijk te debuggen in Safari/Chrome</li>
+                <li>Makkelijk te gebruiken</li>
         </section>
-    	<a href="#" class="deck-prev-link" title="Previous"></a>
+        <section class="slide">
+            <h2>SessionStorage</h2>
+            <ul>
+                <li>Key/Value Map&lt;String, String&gt;</li>                
+                <li>Enkel persistent in huidige browser context</li>
+                <li>Verschillend venster = verschillende sessionStorage</li>
+                <li>Wordt niet telkens heen en weer gestuurd tussen client en server</li>
+            </ul>
+        </section>        
+        <section class="slide">
+            <h2>WebSQL Database API</h2>
+            <ul>
+                <li>Deprecated API</li>                
+                <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
+                <li>Onderliggend SQLite</li>
+                <li>Terug naar SQL? Geen ORM!</li>
+                <li>Leercurve</li>
+                <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
+            </ul>
+        </section>      
+        <section class="slide">
+            <h2>IndexedDB API</h2>
+            <ul>
+                <li>Safari/Chrome/Opera, maar toekomst is onduidelijk</li>
+                <li>Firefox (SQLite), Chrome (LevelDB), IE 10?</li>
+                <li>Leercurve, niet intuïtief</li>
+                <li>Database moeilijk te verwijderen (Chrome)</li>
+                <li>Maximum 5 megabyte, tenzij user toestemming geeft voor meer</li>
+            </ul>
+        </section>              
+        <a href="#" class="deck-prev-link" title="Previous"></a>
 		<a href="#" class="deck-next-link" title="Next"></a>		        
     </body>
 </html>
